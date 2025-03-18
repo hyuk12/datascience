@@ -1,0 +1,43 @@
+digraph {
+	rankdir=LR
+	dpi=300
+	node [fontname=Arial fontsize=10 shape=ellipse style=filled]
+	GD [label="GD
+오차의 정도를 계산 후
+가장 이점이 되는 기울기를 기반으로
+다음 스텝 결정" color=black fillcolor=white]
+	SGD [label="SGD
+확률 휴리스틱 모델을 응용하여
+다음 스텝을 결정하는 판단 계산 최적화" color=black fillcolor=white]
+	Momentum [label="Momentum
+스텝을 계산할 때
+이전 관성을 이용하여
+다음 스텝 방향 계산" color=black fillcolor="#FFC0CB"]
+	NAG [label="NAG
+관성 방향을 먼저 계산 후
+스텝 연산하여 연산 최적화" color=black fillcolor="#FFC0CB"]
+	Adagrad [label="Adagrad
+동일 방향에 대해서는 스텝을 정밀하게,
+새로운 방향에 대해서는 스텝 크기 최적화" color=black fillcolor="#90EE90"]
+	RMSProp [label="RMSProp
+가까운 과거의 맥락을 더 높게 반영,
+지수 이동 평균을 이용하여 개선" color=black fillcolor="#90EE90"]
+	AdaDelta [label="AdaDelta
+보폭이 너무 정밀해져 학습 효율이 안나오는 문제 개선" color=black fillcolor="#90EE90"]
+	Adam [label="Adam
+Momentum과 RMSProp 두 접근법을 적절하게 합산,
+방향 및 보폭을 최적화" color=black fillcolor="#FF6347"]
+	Nadam [label="Nadam
+NAG에 RMSProp 두 접근법을 적절하게 합산,
+방향 및 보폭을 최적화
+(Adam과 다르게 NAG 채택)" color=black fillcolor="#FF6347"]
+	GD -> SGD
+	SGD -> Momentum [label="스텝 방향 최적화" fontsize=8]
+	Momentum -> NAG
+	SGD -> Adagrad [label="스텝 크기 최적화"]
+	Adagrad -> RMSProp
+	RMSProp -> AdaDelta
+	Momentum -> Adam
+	RMSProp -> Adam
+	Adam -> Nadam
+}
